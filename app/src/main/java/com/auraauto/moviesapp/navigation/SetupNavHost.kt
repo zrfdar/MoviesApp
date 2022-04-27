@@ -5,6 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.auraauto.moviesapp.MainViewModel
+import com.auraauto.moviesapp.screens.DetailsScreen
 import com.auraauto.moviesapp.screens.MainScreen
 import com.auraauto.moviesapp.screens.SplashScreen
 import com.auraauto.moviesapp.utils.Constants
@@ -27,7 +28,9 @@ fun SetupNavHost(navController: NavHostController, viewModel: MainViewModel){
         composable(route = Screens.Main.route){
             MainScreen(navController = navController, viewModel = viewModel)
         }
-        composable(route = Screens.Details.route){
+        composable(route = Screens.Details.route + "/{Id}"){ backStackEntry ->
+            DetailsScreen(navController = navController, viewModel = viewModel,
+                itemid = backStackEntry.arguments?.getString("Id") ?: "1")
 
         }
     }
